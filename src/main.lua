@@ -7,5 +7,5 @@ class = require "util.Class"
 local Game = require "game.Game"
 
 local game = Game.new()
-game.run()
+game:run()
 
