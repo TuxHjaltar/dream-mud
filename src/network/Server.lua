@@ -10,6 +10,8 @@ local Server = class(function(self, config)
 	self._listener = socket.bind("*", self.port)
 	
 	self._connections = {}
+
+	function self.onConnection() end
 end)
 
 function Server:readall()
@@ -28,10 +30,14 @@ function Server:readall()
 		if sock == self._listener then
 			-- insert the new connection into the connection table
 			local newSocket = sock:accept()
-			self._connections[newSocket] = Connection.new(newSocket)
+			local newConnection = Connection.new(newSocket)
+			self._connections[newSocket] = newConnection
+
+			-- invoke event
+			self.onConnection(newConnection)
 		else
 			conn = self._connections[sock]
-			if not conn:receive() then
+			if not conn:read() then
 				-- remove from the connection table
 				self._connections[sock] = nil
 			end
