@@ -1,0 +1,3 @@
+return {
+	Server = { hello = "hej" }
+}
