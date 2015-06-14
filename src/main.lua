@@ -1,6 +1,11 @@
 #!/usr/bin/lua
 
-network = require "network"
+-- global includes :3
+class = require "util.Class"
 
-print("Up 'n running!")
-print(network.Server.hello)
+-- start this goshdarn game thing
+local Game = require "game.Game"
+
+local game = Game.new()
+game.run()
+
