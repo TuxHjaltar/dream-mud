@@ -31,7 +31,7 @@ function Server:readall()
 			self._connections[newSocket] = Connection.new(newSocket)
 		else
 			conn = self._connections[sock]
-			if not conn:read() then
+			if not conn:receive() then
 				-- remove from the connection table
 				self._connections[sock] = nil
 			end
