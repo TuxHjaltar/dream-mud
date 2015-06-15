@@ -17,6 +17,6 @@ return
 		{
 			"d2", "d3"
 		},
-		function(self, from) return "Du går ut i gången i D-hallen." .. from ~= "d2" and " En midsommarstång skymtar i bakgrunden." or "" end)
+		function(self, from) return "Du går ut i gången i D-hallen." .. (from ~= "d2" and " En midsommarstång skymtar i bakgrunden." or "") end)
 }
 

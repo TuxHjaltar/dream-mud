@@ -7,13 +7,14 @@ local Game = class(function(self)
 	
 	self.world = World.new(self.config)
 	self.server = Server.new(self.config)
-	self.playerManager = PlayerManager.new()
+	self.playerManager = PlayerManager.new(self.world)
 	
 	function self.server.onConnection(connection)
 		local player = self.playerManager:createPlayer(connection)
 
 		function player.onLogin()
 			print(player.name .. " logged in.")
+			player:enterRoom(self.world:getRoom("d_gang"))
 		end
 		function player.onLogout()
 			print(player.name .. " logged out.")

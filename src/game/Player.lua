@@ -6,9 +6,10 @@ local PlayerState = {
 	Disconnected = 3
 }
 
-local Player = class(function(self, id, connection)
+local Player = class(function(self, id, world, connection)
 	self.name = "Unknown"
 	self.connection = connection
+	self.world = world
 	self.id = id
 	self.commandParser = CommandParser.new(self)
 
@@ -27,6 +28,7 @@ local Player = class(function(self, id, connection)
 			if cmd then cmd:execute()
 			else self:writeln("Ja fattar ente :(") end
 		end
+		self:write("> ")
 	end
 
 	function self.connection.onDisconnect()
@@ -48,6 +50,21 @@ function Player:writeln(text)
 	self.connection:write(text .. "\n")
 end
 
+function Player:enterRoom(room)
+	local oldRoom = self.room
+	if oldRoom then
+		self:writeln(oldRoom:textExit(room))
+	end
+
+	self.room = room
+	self:writeln(self.room:textEnter(oldRoom))
+	
+	-- list links
+	self:writeln("Du kan gå till: ")
+	for i, linkedRoom in ipairs(room.links) do
+		self:writeln(i .. ". " .. linkedRoom.name)
+	end
+end
 
 return Player
 

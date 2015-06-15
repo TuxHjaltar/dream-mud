@@ -22,8 +22,8 @@ function Room:textLook()
 	return "Du ser dig omkring men ser inget intressant."
 end
 
-function Room:getLink(name)
-	return self.links[name]	
+function Room:getLink(index)
+	return self.links[index]	
 end
 
 function Room:enter(player)

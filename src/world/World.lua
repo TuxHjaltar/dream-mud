@@ -15,5 +15,9 @@ local World = class(function(self, config)
 	end
 end)
 
+function World:getRoom(name)
+	return self.rooms[name]
+end
+
 return World
 

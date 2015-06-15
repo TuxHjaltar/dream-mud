@@ -1,7 +1,8 @@
 local Player = require "game.Player"
 
-local PlayerManager = class(function(self)
+local PlayerManager = class(function(self, world)
 	self.players = {}
+	self.world = world
 end)
 
 function PlayerManager:_findFreeId()
@@ -14,7 +15,7 @@ end
 
 function PlayerManager:createPlayer(connection)
 	local id = self:_findFreeId()
-	local player = Player.new(id, connection)
+	local player = Player.new(id, self.world, connection)
 	self.players[id] = player
 	return player
 end
