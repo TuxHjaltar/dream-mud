@@ -1,4 +1,5 @@
 return
 {
-	server_port = 1337
+	server_port = 1337,
+	world_file = "../world/elmia.lua"
 }
