@@ -1,3 +1,5 @@
+local CommandParser = require "game.CommandParser"
+
 local PlayerState = {
 	Connected = 1,
 	LoggedIn = 2,
@@ -8,6 +10,7 @@ local Player = class(function(self, id, connection)
 	self.name = "Unknown"
 	self.connection = connection
 	self.id = id
+	self.commandParser = CommandParser.new(self)
 
 	self.state = PlayerState.Connected
 
@@ -19,6 +22,10 @@ local Player = class(function(self, id, connection)
 			self.state = PlayerState.LoggedIn
 			
 			self.onLogin()
+		elseif self.state == PlayerState.LoggedIn then
+			local cmd = self.commandParser:parse(line)
+			if cmd then cmd:execute()
+			else self:writeln("Vad fan vill du?") end
 		end
 	end
 

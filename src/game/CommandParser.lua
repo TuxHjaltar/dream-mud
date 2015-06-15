@@ -1,4 +1,4 @@
--- Command functions
+local command = require "game.Command"
 
 local CommandParser = class(function(self, player)
 	self._lookupTable = {}
@@ -19,6 +19,11 @@ end)
 
 function CommandParser:parse(line)
 	local start, finish, cmd = string.find(line, "(.- .-) ")
+	if cmd == nil then
+		print "cw command"
+		return nil
+	end
+
 	local args = string.sub(line, finish+1)
 	cmd = string.gsub(cmd, "%s", "_")
 	cmd = string.sub(cmd, 1, -1)
