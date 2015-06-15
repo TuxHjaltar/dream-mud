@@ -1,5 +1,13 @@
+local Room = require "world.Room"
+
 local World = class(function(self, config)
-	self.rooms = dofile(config.world_file)
+	local worldFile, err = loadfile(config.world_file, "text", { Room = Room })
+	if not worldFile then
+		print("World loading error: " .. err)
+		return
+	end
+
+	self.rooms = worldFile()
 
 	-- resolve links
 	for identifier, room in pairs(self.rooms) do
@@ -7,4 +15,5 @@ local World = class(function(self, config)
 	end
 end)
 
+return World
 

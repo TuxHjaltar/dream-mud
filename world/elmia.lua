@@ -19,3 +19,4 @@ return
 		},
 		function(self, from) return "Du går ut i gången i D-hallen." .. from ~= "d2" and " En midsommarstång skymtar i bakgrunden." or "" end)
 }
+

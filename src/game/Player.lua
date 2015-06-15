@@ -25,7 +25,7 @@ local Player = class(function(self, id, connection)
 		elseif self.state == PlayerState.LoggedIn then
 			local cmd = self.commandParser:parse(line)
 			if cmd then cmd:execute()
-			else self:writeln("Vad fan vill du?") end
+			else self:writeln("Ja fattar ente :(") end
 		end
 	end
 
@@ -37,7 +37,7 @@ local Player = class(function(self, id, connection)
 	function self.onLogin() end
 	function self.onLogout() end
 
-	self:write("VA HETER DU?\nNamn: ")
+	self:write("Namn: ")
 end)
 
 function Player:write(text)
